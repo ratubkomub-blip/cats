@@ -1,0 +1,36 @@
+name: Fetch API and Commit
+
+on:
+  workflow_dispatch: 
+  schedule:
+   - cron: '15 4,12,21 * * *' 
+
+ 
+permissions:
+  contents: write
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout  
+        uses: actions/checkout@v4
+
+      - name: Fetch
+        run: |
+          sleep $(( RANDOM % 60 ))
+          curl -s "https://catfact.ninja/fact" -o data.json
+
+      - name: Push
+        run: |
+          git config --global user.name "ratukomub"
+          git config --global user.email "sarahyuureee@students.academic.edu.rs"
+          
+          git add data.json
+           
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "New Data"
+            git push
+          fi
