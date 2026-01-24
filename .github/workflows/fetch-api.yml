@@ -24,7 +24,7 @@ jobs:
       - name: Push
         run: |
           git config --global user.name "ratukomub"
-          git config --global user.email "sarahyuureee@students.academic.edu.rs"
+          git config --global user.email "ratubkomub@gmail.com"
           
           git add data.json
            
